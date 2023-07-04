@@ -6,8 +6,8 @@
     <atom:link href="https://dashaun.dev/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Tue, 4 Jul 2023 18:02:41 +0000</pubDate>
-    <lastBuildDate>Tue, 4 Jul 2023 18:02:41 +0000</lastBuildDate>
+    <pubDate>Tue, 4 Jul 2023 18:04:15 +0000</pubDate>
+    <lastBuildDate>Tue, 4 Jul 2023 18:04:15 +0000</lastBuildDate>
 
     <item>
       <title>Authorization Server in Spring Boot 3.1</title>
@@ -16,7 +16,7 @@
       <guid isPermaLink="false">blog/authorization-server-3-1-1.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The site source code is available on [GitHub](&lt;a href=&quot;https://github.com/dashaun-dev&quot; class=&quot;bare&quot;&gt;https://github.com/dashaun-dev&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The site source code is available on &lt;a href=&quot;https://github.com/dashaun-dev&quot;&gt;https://github.com/dashaun-dev&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Today, there is a Spring Cloud Gateway deployed, and it sits in front of this JBake website.&lt;/p&gt;
