@@ -6,9 +6,252 @@
     <atom:link href="https://dashaun.dev/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Tue, 4 Jul 2023 18:26:33 +0000</pubDate>
-    <lastBuildDate>Tue, 4 Jul 2023 18:26:33 +0000</lastBuildDate>
+    <pubDate>Sun, 2 Feb 2025 20:28:21 +0000</pubDate>
+    <lastBuildDate>Sun, 2 Feb 2025 20:28:21 +0000</lastBuildDate>
 
+    <item>
+      <title>PiKorifi</title>
+      <link>https://dashaun.dev/blog/pikorifi.html</link>
+      <pubDate>Sun, 2 Feb 2025 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">blog/pikorifi.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;m just trying to get this back on track.  Let&amp;#8217;s see how that goes.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Now I&amp;#8217;ve switched to everything running on Ubuntu.  All of my Kubernetes clusters are now running K3s, or they will be.  And, recently, I&amp;#8217;ve really been digging into Korifi.  That&amp;#8217;s what I&amp;#8217;m doing today.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;m moving this site, over to a Raspberry Pi cluster, with Korifi v0.14.0.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;m planning to host, for free, public repositories on Github, that are using the latest and greatest version of Java and Spring Boot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Wish me luck!&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Kubernetes Everywhere</title>
+      <link>https://dashaun.dev/blog/kubernetes-everywhere.html</link>
+      <pubDate>Mon, 4 Sep 2023 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">blog/kubernetes-everywhere.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I have fond memories from the way that Apache Mesos made me feel.  I felt like I could deliver workloads, anywhere.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For me, Kubernetes has replaced Mesos.  I still can&amp;#8217;t do the things that I was doing with Cloud Foundry, but its getting closer.  Cloud Foundry (Tanzu Application Service) is still my primary choice for delivering secure, scalable, reliable, cloud native applications.  But, Kubernetes has some very cool capabilities, and I can deploy it to more situations than Cloud Foundry.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;So, I&amp;#8217;m deploying several Kubernetes clusters, and I&amp;#8217;m going to share my experiences here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_flux_control&quot;&gt;Flux Control&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I&amp;#8217;m using &lt;a href=&quot;https://fluxcd.io&quot;&gt;FluxCD&lt;/a&gt; to help manage my clusters.  I&amp;#8217;ve setup git repository to centralize my cluster configuration.  You can find my &lt;a href=&quot;https://github.com/dashaun-cloud/flux-control&quot;&gt;Flux Control&lt;/a&gt; repository on GitHub.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;One of my goals for &apos;Flux Control&apos; was to be able to hand-off control, to different development teams.  So, the centralized flux-control handles the &apos;admin&apos; level configs, but also reaches out to each development organization&amp;#8217;s git repository to pull in their application configuration.  So each development team can manage their own application configuration, and the centralized flux-control will pull it in.  The convention I&amp;#8217;m using is that each development team, a &apos;tenant&apos; in Flux terminology, must have a &apos;flux&apos; repository, inside of their github org.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_tenants&quot;&gt;Tenants&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As of today, I have a few &apos;tenants&apos; already setup.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dashaun-dev&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;springkubed-io&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;springofficehours-io&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Because each tenant has their own &apos;flux&apos; repository, they manage their application configuration independent of the infrastructure.  The infrastructure is managed by the centralized flux-control repository.  This allows each tenant to be moved across clusters, without having to change their application configuration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_cluster_configuration&quot;&gt;Cluster Configuration&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is where things get fun, this is where the &quot;Kubernetes Everywhere&quot; really shows.  I have several clusters already setup.  Not all of them are managed by &apos;flux-control&apos; yet, but I&amp;#8217;m working on that.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_juice_docker_desktop&quot;&gt;juice-docker-desktop&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single node, Docker Desktop enabled Kubernetes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;My &apos;daily driver&apos; Mac Studio, M1 Max, 32GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_tanzu_docker_desktop&quot;&gt;tanzu-docker-desktop&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single node, Docker Desktop enabled Kubernetes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;My &apos;work laptop&apos; 2020 Mac Book Pro, Intel, 16GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_thunder_docker_desktop&quot;&gt;thunder-docker-desktop&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single node, Docker Desktop enabled Kubernetes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;My &apos;Windows&apos; desktop, Intel, GPU, 32GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_springkubed&quot;&gt;springkubed&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single node&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Raspberry Pi 4, 2GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;k3s&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_arkansas&quot;&gt;arkansas&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Single node&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Intel, 4GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;old, inefficient, unsupported&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;box in the basement closet&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;k3s&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_clusterhat00&quot;&gt;clusterhat00&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://dashaun.com/posts/k3s-on-raspberry-pi-clusterhat/&quot;&gt;ClusterHat v2.5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5 node cluster&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1x Raspberry Pi 4, 8GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4x Raspberry Pi Zero 2, 512MB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Raspberry Pi OS Customized for use with ClusterHat&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;k3s&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_microk8s&quot;&gt;microk8s&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;3 node cluster&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3x Raspberry Pi 4, 8GB RAM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;microk8s&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_suse_rancher&quot;&gt;suse-rancher&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TBD&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_redhat_openshift&quot;&gt;redhat-openshift&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TBD&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_vmware_tanzu&quot;&gt;vmware-tanzu&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TBD&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I still have a ton of work to do, and I will be adding even more clusters.  I&amp;#8217;m also going to be adding more tenants, and more applications.  I&amp;#8217;m going to be using this blog to share my experiences, and hopefully help others along the way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This should be fun.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Authorization Server in Spring Boot 3.1</title>
       <link>https://dashaun.dev/blog/authorization-server-3-1-1.html</link>

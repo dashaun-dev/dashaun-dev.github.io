@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>DaShaun Dev</title>
+    <title>DaShaun Dev - Kubernetes Everywhere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="DaShaun Carter">
@@ -165,49 +165,11 @@
         </section>
         -->
 </section>
-
-    <div id="main">
-        <h1>Tag: blog</h1>
-        
-<article class="post" data-file="../blog/pikorifi.html" data-target="article">
-<header>
+	<div id="main">
+<article class="post">
+   <header>
     <div class="title">
-                    <h2><a href="../blog/pikorifi.html">PiKorifi</a></h2>
-
-
-    </div>
-    <div class="meta">
-         <time class="published"
-            datetime='Feb 02, 2025'>
-            Feb 02, 2025</time>
-            
-        <span class="author"/><span class="name">DaShaun Carter</span><img src="../img/main/avatar.png" alt="DaShaun Carter" /></span>
-    </div>
-</header>
-
-  
-        
-    <p></p>
-
-    <footer>
-        <ul class="actions">
-            <li><a href="../blog/pikorifi.html" class="button big">Continue Reading</a></li>
-        </ul>
-	
-		<ul class="stats">
-    	    <!-- Display the categories associated with this post -->
-    	    <li><i class="fa fa-tags">&nbsp;</i>  Tags: </li>
- 	        <li><a href='../tags/blog.html'>blog</a></li>
-
- 		</ul>
-    </footer>
-</article>
-        
-<article class="post" data-file="../blog/kubernetes-everywhere.html" data-target="article">
-<header>
-    <div class="title">
-                    <h2><a href="../blog/kubernetes-everywhere.html">Kubernetes Everywhere</a></h2>
-
+                    <h1><a href="../blog/kubernetes-everywhere.html">Kubernetes Everywhere</a></h1>
 
     </div>
     <div class="meta">
@@ -219,17 +181,253 @@
     </div>
 </header>
 
+    
   
         <a href="blog/kubernetes-everywhere.html" class="image featured">
         <img src="../img/blog/buzzlightyear-kubernetes.jpeg" alt="Buzz Lightyear to Woody 'Kubernetes, Kubernetes Everywhere'" />
     </a>
-    
-    <p></p>
+     
+    <div id="content">
+       <div class="paragraph">
+<p>I have fond memories from the way that Apache Mesos made me feel.  I felt like I could deliver workloads, anywhere.</p>
+</div>
+<div class="paragraph">
+<p>For me, Kubernetes has replaced Mesos.  I still can&#8217;t do the things that I was doing with Cloud Foundry, but its getting closer.  Cloud Foundry (Tanzu Application Service) is still my primary choice for delivering secure, scalable, reliable, cloud native applications.  But, Kubernetes has some very cool capabilities, and I can deploy it to more situations than Cloud Foundry.</p>
+</div>
+<div class="paragraph">
+<p>So, I&#8217;m deploying several Kubernetes clusters, and I&#8217;m going to share my experiences here.</p>
+</div>
+<div class="sect1">
+<h2 id="_flux_control">Flux Control</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I&#8217;m using <a href="https://fluxcd.io">FluxCD</a> to help manage my clusters.  I&#8217;ve setup git repository to centralize my cluster configuration.  You can find my <a href="https://github.com/dashaun-cloud/flux-control">Flux Control</a> repository on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>One of my goals for 'Flux Control' was to be able to hand-off control, to different development teams.  So, the centralized flux-control handles the 'admin' level configs, but also reaches out to each development organization&#8217;s git repository to pull in their application configuration.  So each development team can manage their own application configuration, and the centralized flux-control will pull it in.  The convention I&#8217;m using is that each development team, a 'tenant' in Flux terminology, must have a 'flux' repository, inside of their github org.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tenants">Tenants</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As of today, I have a few 'tenants' already setup.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>dashaun-dev</p>
+</li>
+<li>
+<p>springkubed-io</p>
+</li>
+<li>
+<p>springofficehours-io</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because each tenant has their own 'flux' repository, they manage their application configuration independent of the infrastructure.  The infrastructure is managed by the centralized flux-control repository.  This allows each tenant to be moved across clusters, without having to change their application configuration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cluster_configuration">Cluster Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is where things get fun, this is where the "Kubernetes Everywhere" really shows.  I have several clusters already setup.  Not all of them are managed by 'flux-control' yet, but I&#8217;m working on that.</p>
+</div>
+<div class="sect2">
+<h3 id="_juice_docker_desktop">juice-docker-desktop</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Single node, Docker Desktop enabled Kubernetes.</p>
+</li>
+<li>
+<p>My 'daily driver' Mac Studio, M1 Max, 32GB RAM</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tanzu_docker_desktop">tanzu-docker-desktop</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Single node, Docker Desktop enabled Kubernetes.</p>
+</li>
+<li>
+<p>My 'work laptop' 2020 Mac Book Pro, Intel, 16GB RAM</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_thunder_docker_desktop">thunder-docker-desktop</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Single node, Docker Desktop enabled Kubernetes.</p>
+</li>
+<li>
+<p>My 'Windows' desktop, Intel, GPU, 32GB RAM</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_springkubed">springkubed</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Single node</p>
+</li>
+<li>
+<p>Raspberry Pi 4, 2GB RAM</p>
+</li>
+<li>
+<p>k3s</p>
+</li>
+<li>
+<p>Ubuntu</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arkansas">arkansas</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Single node</p>
+</li>
+<li>
+<p>Intel, 4GB RAM</p>
+</li>
+<li>
+<p>old, inefficient, unsupported</p>
+</li>
+<li>
+<p>box in the basement closet</p>
+</li>
+<li>
+<p>k3s</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clusterhat00">clusterhat00</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://dashaun.com/posts/k3s-on-raspberry-pi-clusterhat/">ClusterHat v2.5</a></p>
+</li>
+<li>
+<p>5 node cluster</p>
+</li>
+<li>
+<p>1x Raspberry Pi 4, 8GB RAM</p>
+</li>
+<li>
+<p>4x Raspberry Pi Zero 2, 512MB RAM</p>
+</li>
+<li>
+<p>Raspberry Pi OS Customized for use with ClusterHat</p>
+</li>
+<li>
+<p>k3s</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_microk8s">microk8s</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>3 node cluster</p>
+</li>
+<li>
+<p>3x Raspberry Pi 4, 8GB RAM</p>
+</li>
+<li>
+<p>Ubuntu</p>
+</li>
+<li>
+<p>microk8s</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_suse_rancher">suse-rancher</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>TBD</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_redhat_openshift">redhat-openshift</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>TBD</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vmware_tanzu">vmware-tanzu</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>TBD</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I still have a ton of work to do, and I will be adding even more clusters.  I&#8217;m also going to be adding more tenants, and more applications.  I&#8217;m going to be using this blog to share my experiences, and hopefully help others along the way.</p>
+</div>
+<div class="paragraph">
+<p>This should be fun.</p>
+</div>
+</div>
+</div>
+</div>
+    </div>
+	
+	<section id="social-share">
+        <ul class="icons">
+<!-- Social Share Button HTML -->
+
+<!-- Twitter -->
+<li><a href="//twitter.com/share?url=https://dashaun.dev/blog/kubernetes-everywhere.html&text=Kubernetes Everywhere&via=dashaun" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+</a></li>
+
+<!-- LinkedIn -->
+<li><a href="//www.linkedin.com/shareArticle?url=https://dashaun.dev/blog/kubernetes-everywhere.html&title=Kubernetes Everywhere" target="_blank" class="share-btn linkedin">
+    <i class="fa fa-linkedin"></i>
+    <p>LinkedIn</p>
+</a></li>
+
+<!-- Email -->
+<li><a href="mailto:?subject=Check out this post by DaShaun Carter&body=https://dashaun.dev/blog/kubernetes-everywhere.html" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+</a></li>
+        </ul>
+    </section>
+     
 
     <footer>
-        <ul class="actions">
-            <li><a href="../blog/kubernetes-everywhere.html" class="button big">Continue Reading</a></li>
-        </ul>
 	
 		<ul class="stats">
     	    <!-- Display the categories associated with this post -->
@@ -237,84 +435,19 @@
  	        <li><a href='../tags/blog.html'>blog</a></li>
 
  		</ul>
+    	
     </footer>
 </article>
-        
-<article class="post" data-file="../blog/authorization-server-3-1-1.html" data-target="article">
-<header>
-    <div class="title">
-                    <h2><a href="../blog/authorization-server-3-1-1.html">Authorization Server in Spring Boot 3.1</a></h2>
-
-
-    </div>
-    <div class="meta">
-         <time class="published"
-            datetime='Jul 04, 2023'>
-            Jul 04, 2023</time>
-            
-        <span class="author"/><span class="name">DaShaun Carter</span><img src="../img/main/avatar.png" alt="DaShaun Carter" /></span>
-    </div>
-</header>
-
-  
-        <a href="blog/authorization-server-3-1-1.html" class="image featured">
-        <img src="../img/blog/authorization-server-boot-3-1.png" alt="Screenshot from July 4 2023" />
-    </a>
-    
-    <p></p>
-
-    <footer>
-        <ul class="actions">
-            <li><a href="../blog/authorization-server-3-1-1.html" class="button big">Continue Reading</a></li>
-        </ul>
+		
+<ul class="actions pagination">
+  	
+  		        <li><a href="../blog/authorization-server-3-1-1.html" 
+                class="button big previous">Authorization Server in Spring Boot 3.1</a></li>
+        <li><a href="../blog/pikorifi.html" 
+                class="button big next">PiKorifi</a></li>
 	
-		<ul class="stats">
-    	    <!-- Display the categories associated with this post -->
-    	    <li><i class="fa fa-tags">&nbsp;</i>  Tags: </li>
- 	        <li><a href='../tags/blog.html'>blog</a></li>
-
- 		</ul>
-    </footer>
-</article>
-        
-<article class="post" data-file="../blog/its-alive.html" data-target="article">
-<header>
-    <div class="title">
-                    <h2><a href="../blog/its-alive.html">It's Alive</a></h2>
-
-
-    </div>
-    <div class="meta">
-         <time class="published"
-            datetime='Jul 03, 2023'>
-            Jul 03, 2023</time>
-            
-        <span class="author"/><span class="name">DaShaun Carter</span><img src="../img/main/avatar.png" alt="DaShaun Carter" /></span>
-    </div>
-</header>
-
-  
-        <a href="blog/its-alive.html" class="image featured">
-        <img src="../img/blog/sample-image.jpg" alt="DaShaun" />
-    </a>
-    
-    <p></p>
-
-    <footer>
-        <ul class="actions">
-            <li><a href="../blog/its-alive.html" class="button big">Continue Reading</a></li>
-        </ul>
-	
-		<ul class="stats">
-    	    <!-- Display the categories associated with this post -->
-    	    <li><i class="fa fa-tags">&nbsp;</i>  Tags: </li>
- 	        <li><a href='../tags/blog.html'>blog</a></li>
- 	        <li><a href='../tags/asciidoc.html'>asciidoc</a></li>
-
- 		</ul>
-    </footer>
-</article>
-        
+</ul>
+		
     </div>
 
 <!-- Sidebar -->
